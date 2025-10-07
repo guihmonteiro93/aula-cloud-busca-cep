@@ -1,22 +1,18 @@
-async function buscaCepAxios() {
-    let cepInput = document.querySelector("input").value;
-    console.log("buscando cep", cepInput);
+async function buscaCepAxios() {                                    // Função assíncrona para buscar dados do CEP com Axios
+    let cep = document.querySelector("input").value                 // Pega o valor do campo input
+    console.log("buscando cep", cep)                                // Mostra no console o CEP digitado
 
-    let url = "https://viacep.com.br/ws/" + cepInput + "/json/";
+    let url = await "https://viacep.com.br/ws/" + cep + "/json/"    // Monta a URL da API (forma 1)
+    let url2 = await `https://viacep.com.br/ws/${cep}/json/`        // Monta a URL da API (forma 2)
 
-    axios.get(url)
-        .then(function (response) {
-            let cep = response.data;
-            console.log('imprimindo com axios', cep);
-            document.querySelector("#dadoRua").innerText = cep.logradouro;
-            document.querySelector("#dadoBairro").innerText = cep.bairro;
-            document.querySelector("#dadoCidade").innerText = cep.localidade;
-            document.querySelector("#dadoEstado").innerText = cep.uf;
-
-            
-            salvarHistorico(cep.cep, cep.logradouro, cep.bairro, cep.localidade, cep.uf);
+    // usando axios
+    axios.get(url)                                                  // Faz requisição GET com Axios
+        .then(function (response) {                                 // Executa quando a requisição é bem-sucedida
+            console.log('imprimindo com axios', response.data);     // Exibe dados retornados
+            let cep = response.data                                 // Armazena os dados do CEP
+            document.querySelector("#dadoRua").innerText = cep.logradouro       // Mostra o logradouro
+            document.querySelector("#dadoBairro").innerText = cep.bairro        // Mostra o bairro
+            document.querySelector("#dadoCidade").innerText = cep.localidade    // Mostra a cidade
+            document.querySelector("#dadoEstado").innerText = cep.uf            // Mostra o estado
         })
-        .catch(function (error) {
-            console.error('Erro na requisição com Axios:', error);
-        });
 }

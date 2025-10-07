@@ -14,16 +14,19 @@
 
 <body>
   <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">API</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
+        <li><a href="#">VIA CEP</a></li>
       </ul>
+
       <ul id="nav-mobile" class="sidenav">
         <li><a href="#">Navbar Link</a></li>
+
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+
 
   <!-- loading -->
   <div class="loading center">
@@ -48,39 +51,35 @@
       <div class="row">
         <div class="col s12">
           <ul class="tabs">
-            <li class="tab col s3"><a href="#test1">CEP</a></li>
-            <li class="tab col s3"><a class="active" href="#test2">RUA</a></li>
-            <li class="tab col s3"><a href="#logTab">HISTÓRICO</a></li>
+            <li class="tab col s3"><a id="cep-link" class="active" href="#tab-cep">CEP</a></li>
+            <li class="tab col s3"><a id="rua-link" href="#tab-rua">RUA</a></li>
+            <li class="tab col s3"><a id="log-link" onclick="listarLogs()" href="#tab-log">LOG</a></li>
           </ul>
         </div>
-
         <!-- tab do cep -->
-        <div id="test1" class="col s12">
+        <div id="tab-cep" class="col s12">
           <label for="cep">CEP</label>
+
           <input type="number" placeholder="Digite seu CEP" name="cep" id="cep">
-
-          <!-- Botões de busca -->
-          <a onclick="buscaCepFetch()" class="waves-effect waves-light btn">
-            <i class="material-icons left">search</i>Buscar Fetch
-          </a>
-          <a onclick="buscaCepAjax()" class="waves-effect waves-light btn">
-            <i class="material-icons left">search</i>Buscar Ajax
-          </a>
-          <a onclick="buscaCepAxios()" class="waves-effect waves-light btn">
-            <i class="material-icons left">search</i>Buscar Axios
-          </a>
-
-          <!-- Resultado da busca -->
+          <!-- <button >Buscar</button> -->
+          <a onclick="buscaCepFetch()" class="waves-effect waves-light btn"><i
+              class="material-icons left">search</i>Buscar</a>
+          <!-- <a onclick="buscaCepAjax()" class="waves-effect waves-light btn"><i
+              class="material-icons left">search</i>Buscar
+            Ajax</a>
+          <a onclick="buscaCepAxios()" class="waves-effect waves-light btn"><i
+              class="material-icons left">search</i>Buscar Axios oi</a> -->
           <ul class="collection">
             <li class="collection-item">RUA: <span id="dadoRua"></span></li>
             <li class="collection-item">BAIRRO: <span id="dadoBairro"></span></li>
             <li class="collection-item">CIDADE: <span id="dadoCidade"></span></li>
             <li class="collection-item">ESTADO: <span id="dadoEstado"></span></li>
           </ul>
+
         </div>
 
         <!-- tab da rua -->
-        <div id="test2" class="col s12">
+        <div id="tab-rua" class="col s12">
           <div class="row">
             <div class="input-field col s6">
               <select onchange="pegarCidades()" id="estado" class="browser-default"></select>
@@ -94,56 +93,44 @@
               <label for="rua">Rua</label>
             </div>
             <div class="input-field col s6">
-              <a onclick="buscaRua()" class="waves-effect waves-light btn">
-                <i class="material-icons right">search</i>Enviar
-              </a>
+              <a onclick="buscaRua()" class="waves-effect waves-light btn"><i
+                  class="material-icons right">search</i>Enviar</a>
             </div>
           </div>
-          <div id="lista-ruas">aqui vai aparecer varias ruas</div>
+
+          <div id="lista-ruas"></div>
         </div>
 
-        <!-- tab histórico -->
-        <div id="logTab" class="col s12">
-          <h5>Histórico de pesquisas</h5>
-          <div style="margin-bottom:10px;">
-            <a onclick="apagarHistorico()" class="waves-effect waves-light btn red">
-              <i class="material-icons left">delete</i>Limpar
-            </a>
-          </div>
-          <ul id="log" class="collection"></ul>
+        <!-- tab do log -->
+        <div id="tab-log" class="col s12">
+          <ul class="collection" id="lista-logs"></ul>
         </div>
+
       </div>
-    </div>
-  </div>
 
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+      <!--  Scripts Externos -->
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="js/materialize.js"></script>
+      <script src="js/init.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 
-  <script src="/js/scripts/cep/buscaCepAjax.js"></script>
-  <script src="/js/scripts/cep/buscaCepFetch.js"></script>
-  <script src="/js/scripts/cep/buscaCepAxios.js"></script>
-  <script src="/js/scripts/rua/buscaRua.js"></script>
-  <script src="/js/scripts/rua/pegarEstados.js"></script>
-  <script src="/js/scripts/rua/pegarCidades.js"></script>
+      <!-- MEUS SCRIPTS DO CEP -->
+      <script src="/js/scripts/cep/buscaCepAjax.js"></script>
+      <script src="/js/scripts/cep/buscaCepFetch.js"></script>
+      <script src="/js/scripts/cep/buscaCepAxios.js"></script>
+      <!-- MEUS SCRIPT DE RUA -->
+      <script src="/js/scripts/rua/buscaRua.js"></script>
+      <script src="/js/scripts/rua/pegarCidades.js"></script>
+      <script src="/js/scripts/rua/pegarEstados.js"></script>
 
-  <!-- Scripts do histórico -->
-  <script src="js/scripts/log/mostrarHistorico.js"></script>
-  <script src="js/scripts/log/salvarHistorico.js"></script>
-  <script src="js/scripts/log/apagarHistorico.js"></script>
-
-  <script>
-    // Inicializa a lista de histórico ao carregar a página
-    mostrarHistorico();
-  </script>
-
-  <!-- Preloader -->
-  <script>
-    $(".preloader-wrapper").hide();
-  </script>
+      <!-- MEUS SCRIPT DE LOG -->
+      <script src="/js/scripts/log/salvarLogs.js"></script>
+      <script src="/js/scripts/log/listarLogs.js"></script>
+      <script src="/js/scripts/log/montarLogs.js"></script>
+      <script>
+        $(".preloader-wrapper").hide(); // ESCONDE O LOADING
+      </script>
 
 </body>
 

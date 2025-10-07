@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.port": 5502
+    // Define as configurações do Live Server
+    "liveServer.settings.port": 5503 // Define que o servidor local usará a porta 5503
 }
